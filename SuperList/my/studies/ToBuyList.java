@@ -28,10 +28,11 @@ public class ToBuyList {
 	/**
 	 * ToBuyList is a constructor of the class, meaning it initializes a ToBuyList instance with a fileName as initial value
 	 * fileName is the file that has the list of articles to buy
+	 * @throws IOException 
 	 * 
 	 */
 		
-	public ToBuyList(String fileName) {
+	public ToBuyList(String fileName) throws IOException {
 		// When this constructor is created, we call loadList method and pass on the fileName
 		loadList(fileName);
 	}
@@ -40,24 +41,21 @@ public class ToBuyList {
 	
 	/**
 	 * loadList is a private void method, meaning it can only be accessed/used from within this class, it takes the fileName as input and creates a new ArrayList
+	 * @throws IOException 
 	 * 
 	 */
-	private void loadList(String fileName) {
+	private void loadList(String fileName) throws IOException {
 		// Create and store a new ArrayList of the articles to buy, from the file into list variable
 		
-		/*  We add a try-catch block since Files.readAllLines is a read-write kind of method, if we don't do this, the program will not compile
+		/*  Now we will use an exception handler, there are try-catch blocks and there are throwable exceptions.
+		 * We will now try to use a throw exception to manage file errors.
 			There are two types of exceptions: Checked and Unchecked.
 			Checked: are the exceptions that are checked at compile time. 
 			If some code within a method throws a checked exception, then the method must either handle the exception or it must specify the exception using throws keyword.
 		 	In this case, Files.readAllLines() method does throw a checked exception (IOException to be specific) so we must add an exception handler
 		 	Unchecked: are the exceptions that are not checked at compile time. Instead when the program runs.
 		 */
-		try {
-			list = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		list = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
 	}
 	
 	/**

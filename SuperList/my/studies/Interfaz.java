@@ -1,13 +1,21 @@
 package my.studies;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Interfaz {
 	
+	// This class is responsible of creating and calling a ToBuyList instance, which loads the file. We add a try-catch block to the constructor to catch a possible error in the file.
+	// We change the file name to produce the error, and on run the problem should print an error line as shown below, this doesn't break the program because we "handle" it
 	private ToBuyList toBuyList;
 	
 	public Interfaz(String file) {
-		toBuyList = new ToBuyList(file);
+		try {
+			toBuyList = new ToBuyList(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("There has been an error with the file " + file);
+		}
 	}
 	
 	public void showMenu() {
